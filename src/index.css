@@ -1,0 +1,131 @@
+:root {
+  font-family: OpenSans regular, Arial, Helvetica, sans-serif;
+  color: rgba(255, 206, 206, 0.87);
+  /* line-height: 1.5;
+  font-weight: 400;
+  /* color: rgba(223, 140, 140, 0.87); */
+  /* background-color: #af4444; */
+  /* font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale; */
+ }
+
+ .app{
+  display: grid;
+  place-items: center;
+  height: 100vh;
+  width: 100vw;
+}
+
+ body {
+  background-color: antiquewhite;
+  background-color: #af4444;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  min-width: 300px;
+  min-height: 100vh;
+}
+
+p{
+  margin: 0;
+  padding: 0;
+}
+
+
+.board{
+  background-color: #535bf2;
+  /* border: 1px solid hotpink; */
+  border-radius: 4px;
+  position: relative;
+  padding: 0;
+  margin: 0 auto;
+}
+
+.tile{
+  background-color: #ddc7c7;
+  border: 1px solid hotpink;
+  border-radius: 5px;
+  color: hotpink;
+  font-size: 30px;
+  cursor: pointer;
+  position: absolute;
+  display: grid;
+  place-items: center;
+}
+
+.puzzle-solved-container{
+  background-color: #b62626;
+  border-radius: 5px;
+  padding: 00 10px;
+  position: fixed;
+  font-size: 50px;
+  top: 50%;
+  z-index: 2;
+}
+
+.button-container{
+  justify-self: center;
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+button {
+  background-color: #ddc7c7;
+  border-radius: 8px;
+  border: 1px solid transparent;
+  border: 1px solid hotpink;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  cursor: pointer;
+  transition: border-color 0.25s;
+  justify-self: center;
+  height: 45px;
+}
+
+button:hover {
+  border-color: #646cff;
+}
+
+button:focus,
+button:focus-visible {
+  outline: 4px auto -webkit-focus-ring-color;
+}
+
+/*  Added font */
+@font-face {
+  font-family: OpenSans regular;
+  src: url(./assets/Font/OpenSans-Regular.ttf);
+}
+
+@media screen and (max-width: 992px){
+  h1, p {
+    font-size: 5.3vw;
+  }
+}
+
+@media screen and (max-width: 600px){
+  h1, p {
+    font-size: 35px;
+  }
+}
+
+@media  screen and (min-width: 600px) {
+  .tile{
+    font-size: 4.4vw;
+  }
+}
+
+@media screen and (min-width: 992px) {
+  h1{
+    font-size: 3.2em;
+    line-height: 1.1;
+  }
+  .tile{
+    font-size: 35px;
+  }
+}
