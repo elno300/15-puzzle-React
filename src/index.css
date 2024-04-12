@@ -4,6 +4,7 @@
   /* Colors */
   --tiles-background-color: rgba(255, 206, 206, 0.87);
   --board-color: #535bf2
+  --body-background-color: #af4444;
  }
 
 /*====================================*/
@@ -16,7 +17,7 @@
 }
 
  body {
-  background-color: #af4444;
+  background-color: var(--violet);
   padding: 0;
   margin: 0;
   display: flex;
@@ -100,6 +101,32 @@ button:hover {
 button:focus,
 button:focus-visible {
   outline: 4px auto var(--board-color);
+}
+
+.game-intro {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  /* width: 100vw;
+  height: 100vh; */
+  background-color: rgb(0, 0, 0); /* Justera bakgrundsfärgen och genomskinligheten efter behov */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2; /* Se till att elementet ligger över andra element */
+}
+
+.intro-text-wrapper{
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+.intro-text-wrapper p{
+  font-size: 20px;
+  color: white;
 }
 
 /*====================================*/

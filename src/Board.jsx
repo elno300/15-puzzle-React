@@ -9,7 +9,7 @@ import confetti from "https://cdn.skypack.dev/pin/canvas-confetti@v1.9.2-Tii8YtZ
 
 
 function Board(){
-
+   
     const BOARD_SIZE = useBoardSize();
     // An array is created with index 0 - 15
     const[tiles, setTiles] = useState([...Array(NUMBER_OF_TILES).keys()]);
