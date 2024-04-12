@@ -1,25 +1,21 @@
+
 :root {
   font-family: OpenSans regular, Arial, Helvetica, sans-serif;
-  color: rgba(255, 206, 206, 0.87);
-  /* line-height: 1.5;
-  font-weight: 400;
-  /* color: rgba(223, 140, 140, 0.87); */
-  /* background-color: #af4444; */
-  /* font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale; */
+  /* Colors */
+  --tiles-background-color: rgba(255, 206, 206, 0.87);
+  --board-color: #535bf2
  }
 
- .app{
-  display: grid;
-  place-items: center;
-  height: 100vh;
-  width: 100vw;
+/*====================================*/
+/*=============== FONT ===============*/
+/*====================================*/
+
+@font-face {
+  font-family: OpenSans regular;
+  src: url(./assets/Font/OpenSans-Regular.ttf);
 }
 
  body {
-  background-color: antiquewhite;
   background-color: #af4444;
   padding: 0;
   margin: 0;
@@ -28,14 +24,24 @@
   min-height: 100vh;
 }
 
+.app{
+  display: grid;
+  place-items: center;
+  height: 100vh;
+  width: 100vw;
+}
+
 p{
   margin: 0;
   padding: 0;
 }
 
+h1{
+  color: var(--tiles-background-color);
+}
 
 .board{
-  background-color: #535bf2;
+  background-color: var(--violet);
   /* border: 1px solid hotpink; */
   border-radius: 4px;
   position: relative;
@@ -44,7 +50,7 @@ p{
 }
 
 .tile{
-  background-color: #ddc7c7;
+  background-color:var(--tiles-background-color);
   border: 1px solid hotpink;
   border-radius: 5px;
   color: hotpink;
@@ -75,7 +81,7 @@ p{
 }
 
 button {
-  background-color: #ddc7c7;
+  background-color: var(--tiles-background-color);
   border-radius: 8px;
   border: 1px solid transparent;
   border: 1px solid hotpink;
@@ -93,14 +99,12 @@ button:hover {
 
 button:focus,
 button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+  outline: 4px auto var(--board-color);
 }
 
-/*  Added font */
-@font-face {
-  font-family: OpenSans regular;
-  src: url(./assets/Font/OpenSans-Regular.ttf);
-}
+/*====================================*/
+/*========= Media queries ============*/
+/*====================================*/
 
 @media screen and (max-width: 992px){
   h1, p {

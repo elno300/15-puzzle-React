@@ -24,7 +24,7 @@ function Tile(props) {
             }}
             onClick={() => handleTileClick(index)}
             animate={{ x: visualPos.x, y: visualPos.y }}
-            transition={{ duration: 0.5, ease: "easeInOut" }}
+            transition={{ duration: 0.3, ease: "easeInOut" }}
         >
             {tile + 1}
         </motion.li>

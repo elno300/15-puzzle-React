@@ -32,12 +32,12 @@ function Board(){
     // Function for when clicking a tile to make it swap places
     const swapTiles = (tileIndex) => {
         // Index for the empty tile to compare if it's on the same row as the clicked tile.
-        const emptyTileIndex = tiles.indexOf(NUMBER_OF_TILES - 1);
+        const emptyTileIndex = tiles.indexOf(tiles.length - 1);
         const { row: emptyRow, col: emptyCol } = getMatrixPosition(emptyTileIndex);
         const { row: clickedRow, col: clickedCol } = getMatrixPosition(tileIndex);
-        const emptyTileVisualIndex = getIndex(emptyRow, emptyCol);
-        const clickedTileVisualIndex = getIndex(clickedRow, clickedCol)
-        let otherIndex = []
+        // const emptyTileVisualIndex = getIndex(emptyRow, emptyCol);
+        // const clickedTileVisualIndex = getIndex(clickedRow, clickedCol)
+        let tilesToSwap = []
 
         // searching for the number(index) 15 in the list because it's the last, empty tile.
         if(canSwap(tileIndex, tiles.indexOf(tiles.length - 1))){
@@ -51,21 +51,27 @@ function Board(){
 
             if(emptyCol< clickedCol){
 
-                otherIndex.push(emptyTileVisualIndex)
+                tilesToSwap.push(emptyTileIndex)
+
                 for(let i = emptyCol; i< clickedCol ; i++){
-                     otherIndex.push(getIndex(clickedRow, i))
+                     tilesToSwap.push(getIndex(clickedRow, i))
+
                 }
-                otherIndex.push(clickedTileVisualIndex)
-                const swapped = swapManyReverse(tiles, otherIndex)
+
+                tilesToSwap.push(tileIndex)
+
+                const swapped = swapManyReverse(tiles, tilesToSwap)
                 setTiles(swapped)
             }
+
             else if(clickedCol < emptyCol){
 
                 for(let i = clickedCol; i< emptyCol ; i++){
-                     otherIndex.push(getIndex(clickedRow, i))
+                     tilesToSwap.push(getIndex(clickedRow, i))
                 }
-                otherIndex.push(emptyTileVisualIndex)
-                const swapped = swapMany(tiles, otherIndex)
+                tilesToSwap.push(emptyTileIndex)
+
+                const swapped = swapMany(tiles, tilesToSwap)
                 setTiles(swapped)
             }
         }
@@ -76,26 +82,26 @@ function Board(){
 
             if(emptyRow< clickedRow){
 
-                otherIndex.push(emptyTileVisualIndex)
+                tilesToSwap.push(emptyTileIndex)
                 for(let i = emptyRow; i< clickedRow ; i++){
 
-                     otherIndex.push(getIndex(i, clickedCol))
+                     tilesToSwap.push(getIndex(i, clickedCol))
 
                 }
-                otherIndex.push(clickedTileVisualIndex)
+                tilesToSwap.push(tileIndex)
 
-                const swapped = swapManyReverse(tiles, otherIndex)
+                const swapped = swapManyReverse(tiles, tilesToSwap)
                 setTiles(swapped)
             }
             else if(clickedRow< emptyRow){
 
               for(let i = clickedRow; i< emptyRow ; i++){
 
-                     otherIndex.push(getIndex( i, clickedCol))
+                     tilesToSwap.push(getIndex( i, clickedCol))
 
                 }
-                otherIndex.push(emptyTileVisualIndex)
-                const swapped = swapMany(tiles, otherIndex)
+                tilesToSwap.push(emptyTileIndex)
+                const swapped = swapMany(tiles, tilesToSwap)
                 setTiles(swapped)
             }
 
@@ -105,10 +111,10 @@ function Board(){
 
 // This is the first function that will be called once the tile is clicked
 // This function will run when a tile is clicked
-
 const handleTileClick = (index) => {
     // Update tiles
     swapTiles(index)
+
 };
 
 // This function will run when the shuffle button is clicked
@@ -164,6 +170,7 @@ const toggleSound = () =>{
             <div className='puzzle-solved-container'>
             {hasWon && isStarted && <p>Puzzle solved</p>}</div>
             <div className='button-container'>
+                <button>Menu</button>
                 {!isStarted ?
                     (<div><button onClick={handleStartClick}>Start Game</button></div>) :
                     (<button onClick={handleShuffleClick}>Restart Game</button>)
