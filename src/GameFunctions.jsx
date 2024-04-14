@@ -1,6 +1,5 @@
 import { NUMBER_OF_TILES, GRID_SIZE } from "./ContentSize";
 
-// https://codepen.io/unindented/pen/QNWdRQ
 // Checks if the puzzle can be solved.
 export function isSolvable (tiles) {
     let product = 1

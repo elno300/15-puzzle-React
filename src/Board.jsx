@@ -8,6 +8,7 @@ import winSoundEffect from './assets/soundEffects/cute-level-up-3-189853.mp3';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import confetti from "https://cdn.skypack.dev/pin/canvas-confetti@v1.9.2-Tii8YtZuR6hfhzG218v7/mode=imports/optimized/canvas-confetti.js"
 
+
 function Board(){
 
     const BOARD_SIZE = useBoardSize();
@@ -19,13 +20,15 @@ function Board(){
     //Sound-effects
     const swapSound = isSoundEnabled ? new Audio(swapSoundEffect) : null;
     const cantSwapSound = isSoundEnabled ? new Audio(cantSwapSoundEffect) : null;
-    const winning = isSoundEnabled ? new Audio(winSoundEffect): null;
+    // const winning = isSoundEnabled ? new Audio(winSoundEffect): null;
+
 
 
     const shuffleTiles = () => {
         const shuffledTiles = shuffle(tiles)
         setTiles(shuffledTiles)
     }
+
 
 
     // Function for when clicking a tile to make it swap places
@@ -132,8 +135,8 @@ const toggleSound = () =>{
 };
 
 // Calculate the size of each tile based on the board size
-    const placeWidth = Math.round(BOARD_SIZE / GRID_SIZE);
-    const placeHeight = Math.round(BOARD_SIZE / GRID_SIZE);
+    let placeWidth = Math.round(BOARD_SIZE / GRID_SIZE);
+    let placeHeight = Math.round(BOARD_SIZE / GRID_SIZE);
     const style = {
         width: BOARD_SIZE,
         height: BOARD_SIZE
@@ -144,12 +147,10 @@ const toggleSound = () =>{
     useEffect(() => {
         if (hasWon && isStarted) {
             confetti();
+            const winning = isSoundEnabled ? new Audio(winSoundEffect): null;
             winning.play();
         }
-    }, [hasWon, isStarted, winning]);
-
-
-
+    }, [hasWon, isStarted, isSoundEnabled]);
 
     return(
         <>
@@ -169,7 +170,6 @@ const toggleSound = () =>{
             <div className='puzzle-solved-container'>
             {hasWon && isStarted && <p>Puzzle solved</p>}</div>
             <div className='button-container'>
-                <button>Menu</button>
                 {!isStarted ?
                     (<div><button onClick={handleStartClick}>Start Game</button></div>) :
                     (<button onClick={handleShuffleClick}>Restart Game</button>)
