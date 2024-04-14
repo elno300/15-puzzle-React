@@ -3,10 +3,10 @@ import Tile from './Tile.jsx';
 import { NUMBER_OF_TILES, GRID_SIZE, useBoardSize  } from './ContentSize.jsx';
 import { shuffle, canSwap, swap, isSolved, getMatrixPosition, swapMany, getIndex, swapManyReverse } from './GameFunctions.jsx';
 import swapSoundEffect from './assets/soundEffects/happy-pop-2-185287.mp3';
+import cantSwapSoundEffect from './assets/soundEffects/mixkit-gate-latch-click-1924.wav'
 import winSoundEffect from './assets/soundEffects/cute-level-up-3-189853.mp3';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import confetti from "https://cdn.skypack.dev/pin/canvas-confetti@v1.9.2-Tii8YtZuR6hfhzG218v7/mode=imports/optimized/canvas-confetti.js"
-
 
 function Board(){
 
@@ -15,20 +15,18 @@ function Board(){
     const[tiles, setTiles] = useState([...Array(NUMBER_OF_TILES).keys()]);
     const [isStarted, setIsStarted] = useState(false);
     const [isSoundEnabled, setIsSoundEnabled] = useState(true);
-    // const [GRID_SIZE, setGridSize] = useState(initialGridSize);
+
+    //Sound-effects
+    const swapSound = isSoundEnabled ? new Audio(swapSoundEffect) : null;
+    const cantSwapSound = isSoundEnabled ? new Audio(cantSwapSoundEffect) : null;
+    const winning = isSoundEnabled ? new Audio(winSoundEffect): null;
+
 
     const shuffleTiles = () => {
         const shuffledTiles = shuffle(tiles)
         setTiles(shuffledTiles)
     }
 
-    // Function that plays sound effects if isSoundEnabled is true
-    const playSwapSound = () => {
-        if(isSoundEnabled){
-            const swapSound = new Audio(swapSoundEffect);
-            swapSound.play();
-        }
-    }
 
     // Function for when clicking a tile to make it swap places
     const swapTiles = (tileIndex) => {
@@ -41,13 +39,13 @@ function Board(){
 
         // searching for the number(index) 15 in the list because it's the last, empty tile.
         if(canSwap(tileIndex, tiles.indexOf(tiles.length - 1))){
-           const swappedTiles = swap(tiles, tileIndex, tiles.indexOf(tiles.length -1 ))
-           playSwapSound();
-           setTiles(swappedTiles)
+            const swappedTiles = swap(tiles, tileIndex, tiles.indexOf(tiles.length -1 ))
+            swapSound.play()
+            setTiles(swappedTiles)
         }
         // Change position for multiple tiles in a row.
         else if(emptyRow === clickedRow ) {
-            playSwapSound();
+            swapSound.play()
 
             if(emptyCol< clickedCol){
 
@@ -77,7 +75,7 @@ function Board(){
         // Change position for multiple tiles in a column.
         else if(emptyCol === clickedCol ) {
 
-            playSwapSound();
+            swapSound.play()
 
             if(emptyRow< clickedRow){
 
@@ -105,6 +103,9 @@ function Board(){
             }
 
         }
+        else{
+            cantSwapSound.play();
+        }
 
     }
 
@@ -130,8 +131,6 @@ const toggleSound = () =>{
     setIsSoundEnabled(!isSoundEnabled)
 };
 
-
-
 // Calculate the size of each tile based on the board size
     const placeWidth = Math.round(BOARD_SIZE / GRID_SIZE);
     const placeHeight = Math.round(BOARD_SIZE / GRID_SIZE);
@@ -144,14 +143,13 @@ const toggleSound = () =>{
 
     useEffect(() => {
         if (hasWon && isStarted) {
-            // Call the confetti if game is solved and started
             confetti();
-           if(isSoundEnabled){
-            const winSound = new Audio(winSoundEffect);
-            winSound.play();
-           }
+            winning.play();
         }
-    }, [hasWon, isStarted, isSoundEnabled]);
+    }, [hasWon, isStarted, winning]);
+
+
+
 
     return(
         <>
