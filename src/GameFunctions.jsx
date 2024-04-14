@@ -104,6 +104,7 @@ export function swapMany(tiles, indexArray) {
     const firstTileIndex = indexArray[0];
     const firstTile = tiles[firstTileIndex];
 
+
     // Loop through indexArray and move each tile to the next position
     for (let i = 1; i < indexArray.length - 1; i++) {
         const currentIndex = indexArray[i];
