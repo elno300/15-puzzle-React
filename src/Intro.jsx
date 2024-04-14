@@ -15,8 +15,8 @@ function Intro(){
     }, []);
 
     const textVariants = {
-        hidden: { opacity: 0, filter: 'blur(10px)' }, // Lägg till blur-effekt
-        visible: { opacity: 1, filter: 'blur(0px)' }, // Ta bort blur-effekt
+        hidden: { opacity: 0, filter: 'blur(10px)', scale: 0.8  },
+        visible: { opacity: 1, filter: 'blur(0px)', scale: 1  },
     };
 
     return(
@@ -27,7 +27,6 @@ function Intro(){
 
             >
                <AnimatePresence>
-                {/* {isVisible && ( */}
                     <motion.div
                         className='intro-text-wrapper'
                         initial='hidden'
@@ -39,9 +38,8 @@ function Intro(){
                         variants={textVariants}
                         transition={{delay: 0.2, ease: "easeInOut", duration:1.5}}>Sliding puzzle</motion.h1>
                         <motion.p variants={textVariants}
-                        transition={{delay: 0.7, ease: "easeInOut", duration: 1}}>Created by Kajsa  </motion.p>
+                        transition={{delay: 0.5, ease: "easeInOut", duration: 0.9}}>Created by Kajsa  </motion.p>
                     </motion.div>
-                {/* )} */}
             </AnimatePresence>
         </motion.div>
     )

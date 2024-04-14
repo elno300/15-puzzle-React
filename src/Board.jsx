@@ -9,12 +9,13 @@ import confetti from "https://cdn.skypack.dev/pin/canvas-confetti@v1.9.2-Tii8YtZ
 
 
 function Board(){
-   
+
     const BOARD_SIZE = useBoardSize();
     // An array is created with index 0 - 15
     const[tiles, setTiles] = useState([...Array(NUMBER_OF_TILES).keys()]);
     const [isStarted, setIsStarted] = useState(false);
     const [isSoundEnabled, setIsSoundEnabled] = useState(true);
+    // const [GRID_SIZE, setGridSize] = useState(initialGridSize);
 
     const shuffleTiles = () => {
         const shuffledTiles = shuffle(tiles)
@@ -35,8 +36,7 @@ function Board(){
         const emptyTileIndex = tiles.indexOf(tiles.length - 1);
         const { row: emptyRow, col: emptyCol } = getMatrixPosition(emptyTileIndex);
         const { row: clickedRow, col: clickedCol } = getMatrixPosition(tileIndex);
-        // const emptyTileVisualIndex = getIndex(emptyRow, emptyCol);
-        // const clickedTileVisualIndex = getIndex(clickedRow, clickedCol)
+
         let tilesToSwap = []
 
         // searching for the number(index) 15 in the list because it's the last, empty tile.
@@ -55,7 +55,6 @@ function Board(){
 
                 for(let i = emptyCol; i< clickedCol ; i++){
                      tilesToSwap.push(getIndex(clickedRow, i))
-
                 }
 
                 tilesToSwap.push(tileIndex)
@@ -130,6 +129,8 @@ const handleStartClick = () =>{
 const toggleSound = () =>{
     setIsSoundEnabled(!isSoundEnabled)
 };
+
+
 
 // Calculate the size of each tile based on the board size
     const placeWidth = Math.round(BOARD_SIZE / GRID_SIZE);
