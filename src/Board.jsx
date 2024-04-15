@@ -1,35 +1,44 @@
 import { useState, useEffect } from 'react';
+// Component
 import Tile from './Tile.jsx';
+
 import { NUMBER_OF_TILES, GRID_SIZE, useBoardSize  } from './ContentSize.jsx';
+// Functions
 import { shuffle, canSwap, swap, isSolved, getMatrixPosition, swapMany, getIndex, swapManyReverse } from './GameFunctions.jsx';
+
+// Sound-effects
 import swapSoundEffect from './assets/soundEffects/happy-pop-2-185287.mp3';
 import cantSwapSoundEffect from './assets/soundEffects/mixkit-gate-latch-click-1924.wav'
 import winSoundEffect from './assets/soundEffects/cute-level-up-3-189853.mp3';
-import 'bootstrap-icons/font/bootstrap-icons.css';
+// Other effects
 import confetti from "https://cdn.skypack.dev/pin/canvas-confetti@v1.9.2-Tii8YtZuR6hfhzG218v7/mode=imports/optimized/canvas-confetti.js"
-
+// Icons
+import 'bootstrap-icons/font/bootstrap-icons.css';
 
 function Board(){
 
     const BOARD_SIZE = useBoardSize();
     // An array is created with index 0 - 15
-    const[tiles, setTiles] = useState([...Array(NUMBER_OF_TILES).keys()]);
+    // const[tiles, setTiles] = useState([...Array(NUMBER_OF_TILES).keys()]);
+    const [tiles, setTiles] = useState([]);
+      // This effect runs whenever NUMBER_OF_TILES changes
+      useEffect(() => {
+        // Generate new tiles based on the updated NUMBER_OF_TILES
+        const newTiles = [...Array(NUMBER_OF_TILES).keys()];
+        setTiles(newTiles);
+    }, []);
+
     const [isStarted, setIsStarted] = useState(false);
     const [isSoundEnabled, setIsSoundEnabled] = useState(true);
 
     //Sound-effects
     const swapSound = isSoundEnabled ? new Audio(swapSoundEffect) : null;
     const cantSwapSound = isSoundEnabled ? new Audio(cantSwapSoundEffect) : null;
-    // const winning = isSoundEnabled ? new Audio(winSoundEffect): null;
-
-
 
     const shuffleTiles = () => {
         const shuffledTiles = shuffle(tiles)
         setTiles(shuffledTiles)
     }
-
-
 
     // Function for when clicking a tile to make it swap places
     const swapTiles = (tileIndex) => {
@@ -117,7 +126,6 @@ function Board(){
 const handleTileClick = (index) => {
     // Update tiles
     swapTiles(index)
-
 };
 
 // This function will run when the shuffle button is clicked
@@ -133,6 +141,7 @@ const handleStartClick = () =>{
 const toggleSound = () =>{
     setIsSoundEnabled(!isSoundEnabled)
 };
+
 
 // Calculate the size of each tile based on the board size
     let placeWidth = Math.round(BOARD_SIZE / GRID_SIZE);
