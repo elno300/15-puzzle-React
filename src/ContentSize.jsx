@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 
 // How many tiles there are in the rows and columns
-export const GRID_SIZE = 3; // <--- Change grid_size to change the number of rows and columns
+export const GRID_SIZE = 2; // <--- Change grid_size to change the number of rows and columns
 export const NUMBER_OF_TILES = GRID_SIZE*GRID_SIZE;
 
 export function useBoardSize() {

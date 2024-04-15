@@ -26,6 +26,7 @@ function Board(){
         // Generate new tiles based on the updated NUMBER_OF_TILES
         const newTiles = [...Array(NUMBER_OF_TILES).keys()];
         setTiles(newTiles);
+        setIsStarted(false)
     }, []);
 
     const [isStarted, setIsStarted] = useState(false);
@@ -163,6 +164,9 @@ const toggleSound = () =>{
 
     return(
         <>
+        <div className='board-wrapper'>
+           <div className='puzzle-solved-container'>
+                {hasWon && isStarted && <p>Puzzle solved</p>}</div>
             <ul style= {style} className="board">
                 {tiles.map((tile, index) => (
                     <Tile
@@ -174,16 +178,18 @@ const toggleSound = () =>{
                         handleTileClick={handleTileClick}
                         />
                 ))}
+                  {/* If puzzle is started and won then this div is visible */}
             </ul>
-            {/* If puzzle is started and won then this div is visible */}
-            <div className='puzzle-solved-container'>
-            {hasWon && isStarted && <p>Puzzle solved</p>}</div>
-            <div className='button-container'>
-                {!isStarted ?
-                    (<div><button onClick={handleStartClick}>Start Game</button></div>) :
-                    (<button onClick={handleShuffleClick}>Restart Game</button>)
-                }
-            <button onClick={toggleSound}>{isSoundEnabled ? <i className="bi bi-volume-up-fill"></i> : <i className="bi bi-volume-mute-fill"></i>}</button>
+            </div>
+                <div className='button-container'>
+                    {!isStarted ?
+                        (<div><button onClick={handleStartClick}>Start Game</button></div>) :
+                        (<button onClick={handleShuffleClick}>Restart Game</button>)
+                    }
+                <button onClick={toggleSound}>{isSoundEnabled ?
+                    <i className="bi bi-volume-up-fill"></i> :
+                    <i className="bi bi-volume-mute-fill"></i>}
+                </button>
             </div>
         </>
     )

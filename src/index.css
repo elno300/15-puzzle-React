@@ -6,8 +6,8 @@
   --tiles-background-color: rgba(255, 206, 206);
   /* --tiles-background-color: Yellow; */
   --board-color: #535bf2;
-  --body-background-color: #af4444;
-  --body-background-color2:#b62626;;
+  /* --body-background-color: #af4444;
+  --body-background-color2:#b62626;; */
   --red-background: rgb(255, 97, 97);
  }
 
@@ -26,6 +26,7 @@
   margin: 0;
   display: flex;
   min-width: 300px;
+  width: 100vw;
   min-height: 100vh;
 }
 
@@ -54,6 +55,7 @@ h1{
   position: relative;
   padding: 0;
   margin: 0 auto;
+  display: flex;
 }
 
 .tile{
@@ -74,8 +76,15 @@ h1{
   padding: 00 10px;
   position: fixed;
   font-size: 50px;
-  top: 50%;
+  justify-self: end;
+  align-self: center;
   z-index: 2;
+}
+
+.board-wrapper{
+  display: flex;
+  align-content: center;
+  justify-content: center;
 }
 
 .button-container{
