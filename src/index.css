@@ -19,7 +19,6 @@
 }
 
  body {
-  background-color: var(--body-background-color);
   padding: 0;
   margin: 0;
   display: flex;
@@ -34,6 +33,7 @@
   place-items: center;
   height: 100svh;
   width: 100vw;
+  position: fixed;
 }
 
 p{
@@ -49,7 +49,6 @@ h1{
 
 .board{
   background-color: var(--board-color);
-  /* border: 1px solid hotpink; */
   border-radius: 4px;
   position: relative;
   padding: 0;

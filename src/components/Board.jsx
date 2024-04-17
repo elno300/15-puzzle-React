@@ -1,6 +1,5 @@
-import { useState, useEffect } from 'react';
-// Component
-import Tile from './Tile.jsx';
+import { useState, useEffect } from 'react'; // Hooks
+import Tile from './Tile.jsx'; // Component
 
 import { NUMBER_OF_TILES, GRID_SIZE, useBoardSize  } from '../ContentSize.jsx';
 
@@ -17,6 +16,7 @@ import confetti from "https://cdn.skypack.dev/pin/canvas-confetti@v1.9.2-Tii8YtZ
 
 // Icons
 import 'bootstrap-icons/font/bootstrap-icons.css';
+
 
 function Board(){
 
@@ -56,15 +56,15 @@ function Board(){
         // searching for the number(index) 15 in the list because it's the last, empty tile.
         if(canSwap(tileIndex, tiles.indexOf(tiles.length - 1))){
             const swappedTiles = swap(tiles, tileIndex, tiles.indexOf(tiles.length -1 ))
-            swapSound.play()
             setTiles(swappedTiles)
+            swapSound.play()
         }
         // Change position for multiple tiles in a row.
         else if(emptyRow === clickedRow ) {
 
 
             if(emptyCol< clickedCol){
-                swapSound.play()
+
                 tilesToSwap.push(emptyTileIndex)
 
                 for(let i = emptyCol; i< clickedCol ; i++){
@@ -75,10 +75,11 @@ function Board(){
 
                 const swapped = swapManyReverse(tiles, tilesToSwap)
                 setTiles(swapped)
+                swapSound.play()
             }
 
             else if(clickedCol < emptyCol){
-                swapSound.play()
+
                 for(let i = clickedCol; i< emptyCol ; i++){
                      tilesToSwap.push(getIndex(clickedRow, i))
                 }
@@ -86,15 +87,14 @@ function Board(){
 
                 const swapped = swapMany(tiles, tilesToSwap)
                 setTiles(swapped)
+                swapSound.play()
             }
         }
         // Change position for multiple tiles in a column.
         else if(emptyCol === clickedCol ) {
 
-
-
             if(emptyRow< clickedRow){
-                swapSound.play()
+
                 tilesToSwap.push(emptyTileIndex)
                 for(let i = emptyRow; i< clickedRow ; i++){
 
@@ -105,9 +105,10 @@ function Board(){
 
                 const swapped = swapManyReverse(tiles, tilesToSwap)
                 setTiles(swapped)
+                swapSound.play()
             }
             else if(clickedRow< emptyRow){
-                swapSound.play()
+
               for(let i = clickedRow; i< emptyRow ; i++){
 
                      tilesToSwap.push(getIndex( i, clickedCol))
@@ -116,6 +117,7 @@ function Board(){
                 tilesToSwap.push(emptyTileIndex)
                 const swapped = swapMany(tiles, tilesToSwap)
                 setTiles(swapped)
+                swapSound.play()
             }
 
         }
@@ -127,7 +129,10 @@ function Board(){
 
 // This function is triggered upon clicking a tile and updates the tiles by swapping the tile at the given index.
 const handleTileClick = (index) => {
-    swapTiles(index)     // Update tiles
+    if(isStarted){
+        swapTiles(index)
+    }
+    // Update tiles
 };
 
 // This function will run when the shuffle button is clicked
