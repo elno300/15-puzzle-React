@@ -24,7 +24,6 @@ function Intro(){
             className="game-intro"
             animate={{ y: isVisible ? 0 : '-100%', }}
             transition={{ duration: 0.7, ease: "easeInOut", type: "forward" }}
-
             >
                <AnimatePresence>
                     <motion.div
@@ -33,12 +32,14 @@ function Intro(){
                         animate='visible'
                         variants={textVariants}
                     >
-                        <motion.h1
+                    <motion.h1
                         initial = {{ opacity:0 }}
                         variants={textVariants}
-                        transition={{delay: 0.2, ease: "easeInOut", duration:1.5}}>Sliding puzzle</motion.h1>
-                        <motion.p variants={textVariants}
-                        transition={{delay: 0.5, ease: "easeInOut", duration: 0.9}}>Created by Kajsa  </motion.p>
+                        transition={{delay: 0.2, ease: "easeInOut", duration:1.5}}>React 15-puzzle
+                    </motion.h1>
+                    <motion.p variants={textVariants}
+                        transition={{delay: 0.5, ease: "easeInOut", duration: 0.9}}>Created by Kajsa
+                    </motion.p>
                     </motion.div>
             </AnimatePresence>
         </motion.div>

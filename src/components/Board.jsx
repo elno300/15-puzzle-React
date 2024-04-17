@@ -132,7 +132,7 @@ const handleTileClick = (index) => {
     if(isStarted){
         swapTiles(index)
     }
-    // Update tiles
+
 };
 
 // This function will run when the shuffle button is clicked
