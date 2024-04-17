@@ -1,5 +1,5 @@
-import { getMatrixPosition, getVisualPosition } from "./GameFunctions";
-import { NUMBER_OF_TILES, GRID_SIZE } from "./ContentSize";
+import { getMatrixPosition, getVisualPosition } from "../GameFunctions";
+import { NUMBER_OF_TILES, GRID_SIZE } from "../ContentSize";
 import PropTypes from 'prop-types';
 import { motion } from 'framer-motion';
 

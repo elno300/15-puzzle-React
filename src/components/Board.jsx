@@ -2,16 +2,19 @@ import { useState, useEffect } from 'react';
 // Component
 import Tile from './Tile.jsx';
 
-import { NUMBER_OF_TILES, GRID_SIZE, useBoardSize  } from './ContentSize.jsx';
+import { NUMBER_OF_TILES, GRID_SIZE, useBoardSize  } from '../ContentSize.jsx';
+
 // Functions
-import { shuffle, canSwap, swap, isSolved, getMatrixPosition, swapMany, getIndex, swapManyReverse } from './GameFunctions.jsx';
+import { shuffle, canSwap, swap, isSolved, getMatrixPosition, swapMany, getIndex, swapManyReverse } from '../GameFunctions.jsx';
 
 // Sound-effects
-import swapSoundEffect from './assets/soundEffects/happy-pop-2-185287.mp3';
-import cantSwapSoundEffect from './assets/soundEffects/mixkit-gate-latch-click-1924.wav'
-import winSoundEffect from './assets/soundEffects/cute-level-up-3-189853.mp3';
+import swapSoundEffect from '../assets/soundEffects/happy-pop-2-185287.mp3';
+import cantSwapSoundEffect from '../assets/soundEffects/mixkit-gate-latch-click-1924.wav';
+import winSoundEffect from '../assets/soundEffects/cute-level-up-3-189853.mp3';
+
 // Other effects
 import confetti from "https://cdn.skypack.dev/pin/canvas-confetti@v1.9.2-Tii8YtZuR6hfhzG218v7/mode=imports/optimized/canvas-confetti.js"
+
 // Icons
 import 'bootstrap-icons/font/bootstrap-icons.css';
 
@@ -58,10 +61,10 @@ function Board(){
         }
         // Change position for multiple tiles in a row.
         else if(emptyRow === clickedRow ) {
-            swapSound.play()
+
 
             if(emptyCol< clickedCol){
-
+                swapSound.play()
                 tilesToSwap.push(emptyTileIndex)
 
                 for(let i = emptyCol; i< clickedCol ; i++){
@@ -75,7 +78,7 @@ function Board(){
             }
 
             else if(clickedCol < emptyCol){
-
+                swapSound.play()
                 for(let i = clickedCol; i< emptyCol ; i++){
                      tilesToSwap.push(getIndex(clickedRow, i))
                 }
@@ -88,10 +91,10 @@ function Board(){
         // Change position for multiple tiles in a column.
         else if(emptyCol === clickedCol ) {
 
-            swapSound.play()
+
 
             if(emptyRow< clickedRow){
-
+                swapSound.play()
                 tilesToSwap.push(emptyTileIndex)
                 for(let i = emptyRow; i< clickedRow ; i++){
 
@@ -104,7 +107,7 @@ function Board(){
                 setTiles(swapped)
             }
             else if(clickedRow< emptyRow){
-
+                swapSound.play()
               for(let i = clickedRow; i< emptyRow ; i++){
 
                      tilesToSwap.push(getIndex( i, clickedCol))
@@ -122,11 +125,9 @@ function Board(){
 
     }
 
-// This is the first function that will be called once the tile is clicked
-// This function will run when a tile is clicked
+// This function is triggered upon clicking a tile and updates the tiles by swapping the tile at the given index.
 const handleTileClick = (index) => {
-    // Update tiles
-    swapTiles(index)
+    swapTiles(index)     // Update tiles
 };
 
 // This function will run when the shuffle button is clicked
@@ -134,11 +135,13 @@ const handleShuffleClick = () => {
     shuffleTiles()
 };
 
+// Shuffles all tiles on start and sets variabel to true.
 const handleStartClick = () =>{
     shuffleTiles()
     setIsStarted(true)
 };
 
+// Turn off or on the sound-effects
 const toggleSound = () =>{
     setIsSoundEnabled(!isSoundEnabled)
 };

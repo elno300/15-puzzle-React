@@ -80,11 +80,8 @@ export function swapMany(tiles, indexArray) {
     const lastTile = tiles[lastTileIndex];
 
     for (let i = indexArray.length - 1; i > 0; i--) {
-      // Retrieve the index of the current tile to be moved.
       const currentIndex = indexArray[i];
-      // Retrive the indexet of the previous tile that will get the position of the current tile.
       const prevIndex = indexArray[i - 1];
-
       // Move the value of the current tile to the position of the previous tile in the new array.
       tilesResult[currentIndex] = tiles[prevIndex];
     }

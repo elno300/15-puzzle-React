@@ -1,5 +1,5 @@
-import Board from "./Board.jsx"
-import Intro from "./Intro.jsx"
+import Board from "./components/Board.jsx"
+import Intro from "./components/Intro.jsx"
 
 function App() {
 

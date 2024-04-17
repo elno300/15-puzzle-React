@@ -29,9 +29,10 @@
 }
 
 .app{
+  background-color: #ff69b4;
   display: grid;
   place-items: center;
-  height: 100vh;
+  height: 100svh;
   width: 100vw;
 }
 
@@ -139,7 +140,6 @@ button:focus-visible {
   font-size: 20px;
   color: white;
 }
-
 
 
 /*====================================*/
