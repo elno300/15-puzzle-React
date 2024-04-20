@@ -59,10 +59,11 @@ export function shuffle(tiles){
 // Function that checks if there can be a swap of the tiles
 // Returns true if the tiles are next to each other
 export function canSwap (src, dest, GRID_SIZE){
+
   const { row: srcRow, col: srcCol } = getMatrixPosition(src, GRID_SIZE)
   const { row: destRow, col: destCol } = getMatrixPosition(dest, GRID_SIZE);
-
   return Math.abs(srcRow - destRow) + Math.abs(srcCol - destCol) === 1
+
 ;}
 
 // Swap 2 tiles with each other
@@ -74,10 +75,10 @@ export function swap(tiles, src, dest){
 
 // Swap tiles when the empty tile is last in the row or column.
 export function swapMany(tiles, indexArray) {
-    // Copies the tiles
-    const tilesResult = [...tiles];
-    const lastTileIndex = indexArray[indexArray.length - 1];
-    const lastTile = tiles[lastTileIndex];
+
+  const tilesResult = [...tiles];
+  const lastTileIndex = indexArray[indexArray.length - 1];
+  const lastTile = tiles[lastTileIndex];
 
     for (let i = indexArray.length - 1; i > 0; i--) {
       const currentIndex = indexArray[i];
@@ -93,13 +94,12 @@ export function swapMany(tiles, indexArray) {
     return tilesResult;
   }
 
-// This func is called when empty tile is first in the row or col.
+  // This func is called when empty tile is first in the row or col.
   export function swapManyReverse(tiles, indexArray) {
 
     const tilesResult = [...tiles];
     const firstTileIndex = indexArray[0];
     const firstTile = tiles[firstTileIndex];
-
 
     // Loop through indexArray and move each tile to the next position
     for (let i = 1; i < indexArray.length - 1; i++) {

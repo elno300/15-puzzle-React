@@ -17,7 +17,6 @@ import confetti from "https://cdn.skypack.dev/pin/canvas-confetti@v1.9.2-Tii8YtZ
 // Icons
 import 'bootstrap-icons/font/bootstrap-icons.css';
 
-
 function Board(){
 
     const BOARD_SIZE = useBoardSize();
@@ -173,6 +172,7 @@ const toggleSound = () =>{
     return(
         <>
         <div className='board-wrapper'>
+            {/* If puzzle is started and won then this div is visible } */}
            <div className='puzzle-solved-container'>
                 {hasWon && isStarted && <p>Puzzle solved</p>}</div>
             <ul style= {style} className="board">
@@ -186,7 +186,6 @@ const toggleSound = () =>{
                         handleTileClick={handleTileClick}
                         />
                 ))}
-                  {/* If puzzle is started and won then this div is visible */}
             </ul>
             </div>
                 <div className='button-container'>

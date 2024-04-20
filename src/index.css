@@ -28,7 +28,8 @@
 }
 
 .app{
-  background-color: #ff69b4;
+  /* background-color: #ff69b4; */
+
   display: grid;
   place-items: center;
   height: 100svh;
@@ -122,11 +123,11 @@ button:focus-visible {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: var(--board-color); /* Justera bakgrundsfärgen och genomskinligheten efter behov */
+  background-color: var(--board-color);
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 2; /* Se till att elementet ligger över andra element */
+  z-index: 2;
 }
 
 .intro-text-wrapper{

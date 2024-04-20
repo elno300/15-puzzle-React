@@ -5,13 +5,12 @@ import { motion } from 'framer-motion';
 
 function Tile(props) {
     const { tile, index, width, height, handleTileClick } = props;
-
     const { row, col } = getMatrixPosition(index);
     const visualPos = getVisualPosition(row, col, width, height);
 
     const tileStyle = {
-        width: `calc(100% / ${GRID_SIZE})`,
-        height: `calc(100% / ${GRID_SIZE})`,
+        width: `calc(100% / ${GRID_SIZE} )`,
+        height: `calc(100% / ${GRID_SIZE} )`,
     };
 
     return (
@@ -24,7 +23,7 @@ function Tile(props) {
             }}
             onClick={() => handleTileClick(index)}
             animate={{ x: visualPos.x, y: visualPos.y }}
-            transition={{ duration: 0.3, ease: "easeInOut" }}
+            transition={{ duration: 0.2, ease: "easeInOut" }}
         >
             {tile + 1}
         </motion.li>
