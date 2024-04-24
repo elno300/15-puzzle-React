@@ -1,5 +1,5 @@
-import { getMatrixPosition, getVisualPosition } from "../GameFunctions";
-import { NUMBER_OF_TILES, GRID_SIZE } from "../ContentSize";
+import { getMatrixPosition, getVisualPosition } from "../utils/gameFunctions";
+import { NUMBER_OF_TILES, GRID_SIZE } from "../utils/gameSettings";
 import PropTypes from 'prop-types';
 import { motion } from 'framer-motion';
 
@@ -19,9 +19,11 @@ function Tile(props) {
             style={{
                 ...tileStyle,
                 transform: `translate3d(${visualPos.x}px, ${visualPos.y}px, 0)`,
+                // The last tile becomes invisible
                 opacity: tile === NUMBER_OF_TILES - 1 ? 0 : 1,
             }}
             onClick={() => handleTileClick(index)}
+            // Make the tiles swap smoothly
             animate={{ x: visualPos.x, y: visualPos.y }}
             transition={{ duration: 0.2, ease: "easeInOut" }}
         >

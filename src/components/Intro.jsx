@@ -7,11 +7,11 @@ function Intro(){
     const [isVisible, setIsVisible] = useState(true);
 
     useEffect(() => {
-      const timeoutId = setTimeout(() => {
+      const timeout = setTimeout(() => {
         setIsVisible(false);
       }, 2300);
 
-      return () => clearTimeout(timeoutId);
+      return () => clearTimeout(timeout);
     }, []);
 
     const textVariants = {
@@ -22,7 +22,7 @@ function Intro(){
     return(
         <motion.div
             className="game-intro"
-            animate={{ y: isVisible ? 0 : '-100%', }}
+            animate={{ y: isVisible ? 0 : '-100%'}}
             transition={{ duration: 0.7, ease: "easeInOut", type: "forward" }}
             >
                <AnimatePresence>
@@ -37,10 +37,10 @@ function Intro(){
                         variants={textVariants}
                         transition={{delay: 0.2, ease: "easeInOut", duration:1.5}}>React 15-puzzle
                     </motion.h1>
-                    <motion.p
+                    {/* <motion.p
                         variants={textVariants}
                         transition={{delay: 0.5, ease: "easeInOut", duration: 0.9}}>Created by Kajsa
-                    </motion.p>
+                    </motion.p> */}
                     </motion.div>
             </AnimatePresence>
         </motion.div>

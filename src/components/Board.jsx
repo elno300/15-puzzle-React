@@ -1,10 +1,23 @@
 import { useState, useEffect } from 'react'; // Hooks
 import Tile from './Tile.jsx'; // Component
 
-import { NUMBER_OF_TILES, GRID_SIZE, useBoardSize  } from '../ContentSize.jsx';
+import {
+    NUMBER_OF_TILES,
+    GRID_SIZE,
+    useBoardSize
+} from '../utils/gameSettings.jsx';
 
 // Functions
-import { shuffle, canSwap, swap, isSolved, getMatrixPosition, swapMany, getIndex, swapManyReverse } from '../GameFunctions.jsx';
+import {
+    shuffle,
+    canSwap,
+    swap,
+    isSolved,
+    getMatrixPosition,
+    swapMany,
+    getIndex,
+    swapManyReverse
+} from '../utils/gameFunctions.jsx';
 
 // Sound-effects
 import swapSoundEffect from '../assets/soundEffects/happy-pop-2-185287.mp3';
@@ -22,7 +35,14 @@ function Board(){
     const BOARD_SIZE = useBoardSize();
     // An array is created with index 0 - 15
     // const[tiles, setTiles] = useState([...Array(NUMBER_OF_TILES).keys()]);
+    const [isStarted, setIsStarted] = useState(false);
+    const [isSoundEnabled, setIsSoundEnabled] = useState(true);
+
+    //Sound-effects
+    const swapSound = isSoundEnabled ? new Audio(swapSoundEffect) : null;
+    const cantSwapSound = isSoundEnabled ? new Audio(cantSwapSoundEffect) : null;
     const [tiles, setTiles] = useState([]);
+
       // This effect runs whenever NUMBER_OF_TILES changes
       useEffect(() => {
         // Generate new tiles based on the updated NUMBER_OF_TILES
@@ -31,19 +51,12 @@ function Board(){
         setIsStarted(false)
     }, []);
 
-    const [isStarted, setIsStarted] = useState(false);
-    const [isSoundEnabled, setIsSoundEnabled] = useState(true);
-
-    //Sound-effects
-    const swapSound = isSoundEnabled ? new Audio(swapSoundEffect) : null;
-    const cantSwapSound = isSoundEnabled ? new Audio(cantSwapSoundEffect) : null;
-
     const shuffleTiles = () => {
         const shuffledTiles = shuffle(tiles)
         setTiles(shuffledTiles)
-    }
+    };
 
-    // Function for when clicking a tile to make it swap places
+    // Swaps the tiles
     const swapTiles = (tileIndex) => {
         // Index for the empty tile to compare if it's on the same row as the clicked tile.
         const emptyTileIndex = tiles.indexOf(tiles.length - 1);
@@ -52,7 +65,6 @@ function Board(){
 
         let tilesToSwap = []
 
-        // searching for the number(index) 15 in the list because it's the last, empty tile.
         if(canSwap(tileIndex, tiles.indexOf(tiles.length - 1))){
             const swappedTiles = swap(tiles, tileIndex, tiles.indexOf(tiles.length -1 ))
             setTiles(swappedTiles)
@@ -60,7 +72,6 @@ function Board(){
         }
         // Change position for multiple tiles in a row.
         else if(emptyRow === clickedRow ) {
-
 
             if(emptyCol< clickedCol){
 
@@ -95,13 +106,11 @@ function Board(){
             if(emptyRow< clickedRow){
 
                 tilesToSwap.push(emptyTileIndex)
+
                 for(let i = emptyRow; i< clickedRow ; i++){
-
-                     tilesToSwap.push(getIndex(i, clickedCol))
-
+                    tilesToSwap.push(getIndex(i, clickedCol))
                 }
                 tilesToSwap.push(tileIndex)
-
                 const swapped = swapManyReverse(tiles, tilesToSwap)
                 setTiles(swapped)
                 swapSound.play()
@@ -109,21 +118,17 @@ function Board(){
             else if(clickedRow< emptyRow){
 
               for(let i = clickedRow; i< emptyRow ; i++){
-
-                     tilesToSwap.push(getIndex( i, clickedCol))
-
+                    tilesToSwap.push(getIndex( i, clickedCol))
                 }
                 tilesToSwap.push(emptyTileIndex)
                 const swapped = swapMany(tiles, tilesToSwap)
                 setTiles(swapped)
                 swapSound.play()
             }
-
         }
         else{
             cantSwapSound.play();
         }
-
     }
 
 // This function is triggered upon clicking a tile and updates the tiles by swapping the tile at the given index.
@@ -131,10 +136,9 @@ const handleTileClick = (index) => {
     if(isStarted){
         swapTiles(index)
     }
-
 };
 
-// This function will run when the shuffle button is clicked
+// Shuffles the tiles when the shuffle button is clicked
 const handleShuffleClick = () => {
     shuffleTiles()
 };
@@ -145,11 +149,10 @@ const handleStartClick = () =>{
     setIsStarted(true)
 };
 
-// Turn off or on the sound-effects
+// Turn the sound-effects off or on.
 const toggleSound = () =>{
     setIsSoundEnabled(!isSoundEnabled)
 };
-
 
 // Calculate the size of each tile based on the board size
     let placeWidth = Math.round(BOARD_SIZE / GRID_SIZE);
@@ -190,7 +193,7 @@ const toggleSound = () =>{
             </div>
                 <div className='button-container'>
                     {!isStarted ?
-                        (<div><button onClick={handleStartClick}>Start Game</button></div>) :
+                        (<button onClick={handleStartClick}>Start Game</button>) :
                         (<button onClick={handleShuffleClick}>Restart Game</button>)
                     }
                 <button onClick={toggleSound}>{isSoundEnabled ?

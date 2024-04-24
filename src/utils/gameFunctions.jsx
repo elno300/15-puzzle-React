@@ -1,4 +1,4 @@
-import { NUMBER_OF_TILES, GRID_SIZE } from "./ContentSize";
+import { NUMBER_OF_TILES, GRID_SIZE } from "./gameSettings"
 
 // Checks if the puzzle can be solved.
 export function isSolvable (tiles) {

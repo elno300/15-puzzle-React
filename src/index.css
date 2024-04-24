@@ -6,7 +6,8 @@
   --tiles-background-color: rgba(255, 206, 206);
   --board-color: #535bf2;
   --tiles-font-color: #ff69b4;
-  --red-background: rgb(255, 97, 97);
+  --puzzle-solved-background: #b62626;
+  background-color: #ff69b4;
  }
 
 /*====================================*/
@@ -28,8 +29,6 @@
 }
 
 .app{
-  /* background-color: #ff69b4; */
-
   display: grid;
   place-items: center;
   height: 100svh;
@@ -44,8 +43,6 @@ p{
 
 h1{
   color: var(--tiles-background-color);
-  /* margin: 0;
-  padding: 0; */
 }
 
 .board{
@@ -70,7 +67,7 @@ h1{
 }
 
 .puzzle-solved-container{
-  background-color: #b62626;
+  background-color: var(--puzzle-solved-background);
   border-radius: 5px;
   padding: 00 10px;
   position: fixed;
@@ -99,7 +96,7 @@ button {
   background-color: var(--tiles-background-color);
   border-radius: 8px;
   border: 1px solid transparent;
-  border: 1px solid hotpink;
+  border: 1px solid var(--tiles-font-color);
   padding: 0.6em 1.2em;
   font-size: 1em;
   cursor: pointer;
